@@ -1,6 +1,4 @@
 const fs = require("fs");
-const { readFile, writeFile } = require("fs/promises");
-
 const http = require("http");
 
 // To check if the file exist from the beginning , else create a newfile
@@ -15,72 +13,35 @@ if (!isExit) {
   });
 }
 
-
 /*
 implement your server code here
 */
 const { v4: uuidv4 } = require("uuid");
 let products = require("./product.json");
 
-// const server = http.createServer((req, res) => {
-//   if (req.url === "/api/products" && req.method === "GET") {
-//     getProducts(req, res);
-//   } else if (req.url?.match(/\/api\/products\/\w+/) && req.method === "GET") {
-//     const id = req.url.split("/")[3];
-//     getProduct(req, res, id);
-//   } else if (req.url === "/api/products" && req.method === "POST") {
-//     res.writeHead(200, { "Content-Type": "application/json" });
-//     createProduct(req, res);
-//   } else if (req.url?.match(/\/api\/products\/\w+/) && req.method === "PUT") {
-//     const id = req.url.split("/")[3];
-//     updateProduct(req, res, id);
-//   } else if (
-//     req.url?.match(/\/api\/products\/\w+/) &&
-//     req.method === "DELETE"
-//   ) {
-//     const id = req.url.split("/")[3];
-//     deleteProduct(req, res, id);
-//   } else {
-//     res.writeHead(404, { "content-type": "application/json" });
-//     res.end(JSON.stringify({ message: "Route not found" }));
-//   }
-// });
-
 const server = http.createServer((req, res) => {
-  switch (req.method && req.url === "/api/products") {
-    case "GET":
-      getProducts(req, res);
-      break;
-    case "GET":
-      if(req.url.match(/\/api\/products\/\w+/) ){
-        const id = req.url.split("/")[3];
-        getProduct(req, res, id);
-      }
-break;
-case "POST":
-  res.writeHead(200, { "Content-Type": "application/json" });
-  createProduct(req, res);
-  break;
-  case "PUT":
-    if(req.url.match(/\/api\/products\/\w+/) ){
-      const id = req.url.split("/")[3];
-      updateProduct(req, res, id);
-    }
-    break;
-    case "DELETE":
-      if(req.url.match(/\/api\/products\/\w+/) ){
-        const id = req.url.split("/")[3];
-        deleteProduct(req, res, id);
-      } 
-      break;
-      default:
-        res.writeHead(404, { "content-type": "application/json" });
-        res.end(JSON.stringify({ message: "Route not found" }));
-
+  if (req.url === "/api/products" && req.method === "GET") {
+    getProducts(req, res);
+  } else if (req.url?.match(/\/api\/products\/\w+/) && req.method === "GET") {
+    const id = req.url.split("/")[3];
+    getProduct(req, res, id);
+  } else if (req.url === "/api/products" && req.method === "POST") {
+    res.writeHead(200, { "Content-Type": "application/json" });
+    createProduct(req, res);
+  } else if (req.url?.match(/\/api\/products\/\w+/) && req.method === "PUT") {
+    const id = req.url.split("/")[3];
+    updateProduct(req, res, id);
+  } else if (
+    req.url?.match(/\/api\/products\/\w+/) &&
+    req.method === "DELETE"
+  ) {
+    const id = req.url.split("/")[3];
+    deleteProduct(req, res, id);
+  } else {
+    res.writeHead(404, { "content-type": "application/json" });
+    res.end(JSON.stringify({ message: "Route not found" }));
   }
 });
-
-
 
 const PORT = process.env.PORT || 6000;
 

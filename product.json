@@ -1,0 +1,20 @@
+[
+  {
+    "id": "64728700-5086-44d1-9a13-53f35635ae24",
+    "organization": "",
+    "createdAt": "2022-03-24T19:41:41.202Z",
+    "updatedAt": "2022-03-24T21:47:38.089Z",
+    "products": [
+      "developers"
+    ],
+    "marketValue": "09%",
+    "address": "benin",
+    "ceo": "cn",
+    "country": "Tn",
+    "noOfEmployees": 77777,
+    "employees": [
+      "james bond",
+      "jackie chan"
+    ]
+  }
+]
